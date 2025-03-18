@@ -1,10 +1,19 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { DefaultTheme } from "./styles";
-import { useDynamicForm } from "./hooks";
+import { AppRoutes } from "./AppRoutes";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
-  useDynamicForm();
-  return <ThemeProvider theme={DefaultTheme}></ThemeProvider>;
+  return (
+    <ThemeProvider theme={DefaultTheme}>
+      <CssBaseline />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <AppRoutes />
+      </LocalizationProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;

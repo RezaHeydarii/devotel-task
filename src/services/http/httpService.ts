@@ -3,4 +3,7 @@ import { Axios } from "axios";
 
 export const httpService = new Axios({
   baseURL: API_BASE_URL,
+  transformResponse: (r) => {
+    return JSON.parse(r);
+  },
 });
