@@ -4,7 +4,7 @@ import { useDynamicForm, useSubmitDynamicForm } from "@app/hooks";
 import { DynamicForm } from "@app/types";
 import { Button, Divider, Grid2, Skeleton } from "@mui/material";
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [dynamicFormList, { isLoading }] = useDynamicForm();
@@ -44,6 +44,7 @@ const HomePage = () => {
         container
         alignItems="center"
         rowSpacing={1}
+        columnSpacing={1}
         justifyContent="space-between"
       >
         <Grid2 size={{ xs: 12, md: 4 }}>
@@ -61,11 +62,11 @@ const HomePage = () => {
             />
           )}
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 1 }}>
+
+        <Grid2 size={{ xs: 6, md: 6 }}>
           <Button
             onClick={onSelect}
             type="button"
-            fullWidth
             size="large"
             variant="contained"
             disabled={
@@ -74,6 +75,11 @@ const HomePage = () => {
           >
             Select
           </Button>
+        </Grid2>
+        <Grid2 container justifyContent="flex-end" size={{ xs: 6, md: 2 }}>
+          <Link to="/forms" className="whitespace-nowrap">
+            <Button role="div">Submitted Forms</Button>
+          </Link>
         </Grid2>
       </Grid2>
       <Divider sx={{ marginTop: "1rem", marginBottom: "2.5rem" }} />
