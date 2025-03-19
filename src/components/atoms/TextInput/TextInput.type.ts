@@ -13,4 +13,5 @@ export type TextInputProps = Pick<
   | "onBlur"
   | "helperText"
   | "error"
+  | "fullWidth"
 >;

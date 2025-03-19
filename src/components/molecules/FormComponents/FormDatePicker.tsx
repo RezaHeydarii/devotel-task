@@ -3,11 +3,12 @@ import { FormComponentProps } from "./FormComponents.type";
 import { Controller } from "react-hook-form";
 
 export const FormDatePicker = (props: FormComponentProps<DatePickerProps>) => {
-  const { name, control, ...inputProps } = props;
+  const { name, control, required, ...inputProps } = props;
   return (
     <Controller
       name={name}
       control={control}
+      rules={{ required }}
       render={({ field, fieldState }) => (
         <DatePicker
           {...inputProps}

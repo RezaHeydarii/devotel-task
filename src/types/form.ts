@@ -13,7 +13,12 @@ export interface DynamicFormInputField extends DynamicFormFieldShared {
 export interface DynamicFormSelectField
   extends Omit<DynamicFormInputField, "type"> {
   type: "select";
-  options: string[];
+  options?: string[];
+  dynamicOptions?: {
+    dependsOn: string;
+    endpoint: string;
+    method: "GET";
+  };
 }
 
 export interface DynamicFormGroupField extends DynamicFormFieldShared {
@@ -26,7 +31,7 @@ export interface DynamicFormGroupField extends DynamicFormFieldShared {
 export type DynamicFormField =
   | DynamicFormInputField
   | DynamicFormGroupField
-  | DynamicFormInputField;
+  | DynamicFormSelectField;
 
 export interface DynamicForm {
   formId: string;

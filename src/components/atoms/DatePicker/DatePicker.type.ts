@@ -2,7 +2,7 @@ import { DatePickerProps as MuiDatePickerProps } from "@mui/x-date-pickers/DateP
 
 export interface DatePickerProps
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extends Pick<MuiDatePickerProps<any>, "value" | "onChange"> {
+  extends Pick<MuiDatePickerProps<any>, "value" | "onChange" | "label"> {
   error?: boolean;
   helperText?: string;
 }

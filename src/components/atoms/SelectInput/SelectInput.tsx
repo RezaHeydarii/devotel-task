@@ -36,7 +36,7 @@ export const SelectInput = forwardRef<HTMLInputElement, SelectInputProps>(
         >
           {options.map((op) => {
             return (
-              <MenuItem disabled={op.disabled} value={op.value}>
+              <MenuItem key={op.value} disabled={op.disabled} value={op.value}>
                 {op.label}
               </MenuItem>
             );

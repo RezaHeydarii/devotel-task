@@ -5,10 +5,15 @@ import { forwardRef } from "react";
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (props, ref) => {
-    const { value, onChange, error, helperText } = props;
+    const { value, onChange, error, helperText, label } = props;
     return (
       <>
-        <MuiDatePicker ref={ref} value={value} onChange={onChange} />
+        <MuiDatePicker
+          ref={ref}
+          value={value}
+          onChange={onChange}
+          label={label}
+        />
         <FormHelperText error={error}>{helperText}</FormHelperText>
       </>
     );

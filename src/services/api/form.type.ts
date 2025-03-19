@@ -1,4 +1,8 @@
-import { DynamicForm, SubmittedForm } from "@app/types/form";
+import {
+  DynamicForm,
+  DynamicFormSelectField,
+  SubmittedForm,
+} from "@app/types/form";
 
 export type GetDynamicFormResponse = DynamicForm[];
 
@@ -10,3 +14,8 @@ export interface SubmitDynamicFormResponse {
 }
 
 export type SubmittedApplicationResponse = SubmittedForm;
+
+export type GetDependSelectOptionsRequest =
+  Required<DynamicFormSelectField>["dynamicOptions"] & {
+    dependOnValue: string;
+  };

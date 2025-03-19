@@ -5,6 +5,7 @@ import {
 } from "@app/constants";
 import { httpService } from "../http/httpService";
 import {
+  GetDependSelectOptionsRequest,
   GetDynamicFormResponse,
   SubmitDynamicFormRequest,
   SubmitDynamicFormResponse,
@@ -26,5 +27,19 @@ export const submitDynamicForm = (data: SubmitDynamicFormRequest) => {
 export const getSubmittedApplications = () => {
   return httpService
     .get<SubmittedApplicationResponse>(FETCH_SUBMITTED_APPLICATION)
+    .then((res) => res.data);
+};
+
+export const getDependSelectOptions = ({
+  dependsOn,
+  endpoint,
+  method,
+  dependOnValue,
+}: GetDependSelectOptionsRequest) => {
+  return httpService
+    .request<Record<string, unknown>>({
+      method,
+      url: `${endpoint}?${dependsOn}=${dependOnValue}`,
+    })
     .then((res) => res.data);
 };
