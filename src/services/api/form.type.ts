@@ -6,9 +6,7 @@ import {
 
 export type GetDynamicFormResponse = DynamicForm[];
 
-export interface SubmitDynamicFormRequest {
-  test: string;
-}
+export type SubmitDynamicFormRequest = Record<string, unknown>;
 export interface SubmitDynamicFormResponse {
   test: string;
 }

@@ -14,7 +14,9 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           onChange={onChange}
           label={label}
         />
-        <FormHelperText error={error}>{helperText}</FormHelperText>
+        {helperText && (
+          <FormHelperText error={error}>{helperText}</FormHelperText>
+        )}
       </>
     );
   }

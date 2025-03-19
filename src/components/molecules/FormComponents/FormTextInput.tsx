@@ -13,6 +13,7 @@ export const FormTextInput = (props: FormComponentProps<TextInputProps>) => {
         <TextInput
           {...inputProps}
           {...field}
+          value={field.value || ""}
           error={!!fieldState.error}
           helperText={inputProps.helperText || fieldState.error?.message}
         />

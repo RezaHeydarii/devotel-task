@@ -16,6 +16,7 @@ export const FormSelectInput = (
           {...inputProps}
           {...field}
           error={!!fieldState.error}
+          value={field.value || ""}
           helperText={inputProps.helperText || fieldState.error?.message}
         />
       )}

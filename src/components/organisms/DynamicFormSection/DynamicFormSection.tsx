@@ -1,21 +1,18 @@
-import { useForm } from "react-hook-form";
 import { FormFieldComponentFactory } from "../FormFieldComponentFactory";
 import { DynamicFormSectionProps } from "./DynamicFormSection.type";
 import { Button, Grid2 } from "@mui/material";
-import { useEffect } from "react";
+import { useDynamicFormProps } from "./hooks/useDynamicFormProps";
 
 export const DynamicFormSection = (props: DynamicFormSectionProps) => {
-  const { dynamicForm } = props;
+  const { dynamicForm, onSubmit: onSubmitProp, isPending } = props;
   const { fields } = dynamicForm;
-  const { control, handleSubmit, reset, watch } =
-    useForm<Record<string, unknown>>();
+  const { control, handleSubmit, reset, watch } = useDynamicFormProps(
+    dynamicForm.formId
+  );
 
-  const onSubmit = handleSubmit(() => {});
-
-  useEffect(() => {
-    reset({});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dynamicForm.formId]);
+  const onSubmit = handleSubmit((data) => {
+    onSubmitProp(data, () => reset({}));
+  });
 
   return (
     <form onSubmit={onSubmit}>
@@ -32,7 +29,23 @@ export const DynamicFormSection = (props: DynamicFormSectionProps) => {
         })}
       </Grid2>
       <div className="flex justify-center items-center mt-5">
-        <Button type="submit" size="large" color="success" variant="contained">
+        <Button
+          onClick={() => reset({})}
+          size="large"
+          color="warning"
+          variant="contained"
+          disabled={isPending}
+        >
+          Reset
+        </Button>
+        <div className="w-1" />
+        <Button
+          disabled={isPending}
+          type="submit"
+          size="large"
+          color="success"
+          variant="contained"
+        >
           Submit Form
         </Button>
       </div>

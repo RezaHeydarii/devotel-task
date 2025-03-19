@@ -1,7 +1,15 @@
-import { FETCH_DYNAMIC_FORM } from "@app/constants";
-import { getDependSelectOptions, getDynamicForm } from "@app/services";
+import {
+  FETCH_DYNAMIC_FORM,
+  FETCH_SUBMITTED_APPLICATION,
+} from "@app/constants";
+import {
+  getDependSelectOptions,
+  getDynamicForm,
+  getSubmittedApplications,
+  submitDynamicForm,
+} from "@app/services";
 import { DynamicFormSelectField } from "@app/types";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useDynamicForm = () => {
   const { data, ...rest } = useQuery({
@@ -39,4 +47,26 @@ export const useDependSelectOptions = (
       }, [])
     : [];
   return [list, rest] as const;
+};
+
+export const useSubmitDynamicForm = () => {
+  const { mutate, ...rest } = useMutation({
+    mutationFn: submitDynamicForm,
+  });
+
+  return [mutate, rest] as const;
+};
+
+export const useSubmittedDynamicFormsList = () => {
+  const { data, ...rest } = useQuery({
+    queryKey: [FETCH_SUBMITTED_APPLICATION],
+    queryFn: getSubmittedApplications,
+  });
+
+  const res = {
+    columns: data?.columns || [],
+    data: data?.data || [],
+  };
+
+  return [res, rest] as const;
 };

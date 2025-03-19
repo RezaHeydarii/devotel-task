@@ -1,14 +1,18 @@
 import { SelectInput } from "@app/components/atoms";
 import { DynamicFormSection } from "@app/components/organisms";
-import { useDynamicForm } from "@app/hooks";
+import { useDynamicForm, useSubmitDynamicForm } from "@app/hooks";
 import { DynamicForm } from "@app/types";
 import { Button, Divider, Grid2, Skeleton } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [dynamicFormList, { isLoading }] = useDynamicForm();
   const [selectedFormId, setSelectedFormId] = useState<string>();
   const [selectedForm, setSelectedForm] = useState<DynamicForm>();
+
+  const [submitForm, { isPending }] = useSubmitDynamicForm();
+  const navigate = useNavigate();
 
   const selectOptions = dynamicFormList.map((frm) => ({
     label: frm.title,
@@ -21,6 +25,18 @@ const HomePage = () => {
     );
     setSelectedForm(selected);
   };
+
+  const onSubmitForm = useCallback(
+    (data: Record<string, unknown>, resetForm: () => void) => {
+      submitForm(data, {
+        onSuccess: () => {
+          resetForm();
+          setTimeout(() => navigate("/forms"), 300);
+        },
+      });
+    },
+    [navigate, submitForm]
+  );
 
   return (
     <section className="pt-5">
@@ -68,7 +84,14 @@ const HomePage = () => {
           </p>
         </div>
       )}
-      {selectedForm && <DynamicFormSection dynamicForm={selectedForm} />}
+      <p className="mb-5">*Form has autosave draft feature.</p>
+      {selectedForm && (
+        <DynamicFormSection
+          dynamicForm={selectedForm}
+          isPending={isPending}
+          onSubmit={onSubmitForm}
+        />
+      )}
     </section>
   );
 };
