@@ -1,54 +1,28 @@
-# React + TypeScript + Vite
+# Setup Instructions  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Create a `.env` file in the project root and define the required environment variables based on the `.env.example` file.  
+2. Run `yarn dev` to start the project in development mode.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# API Usage Details  
 
-## Expanding the ESLint configuration
+### The API is structured into three layers:  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **HTTP Requests (located in `./src/services/api`)**  
+   - Axios is used as the HTTP client due to its powerful features, such as interceptors and simplified request handling.  
+   - In this layer, payloads are formatted as query parameters, request bodies, or form data as needed.  
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. **API Hooks (located in `./src/hooks/api`)**  
+   - React Query is used to manage API requests, caching, and data synchronization.  
+   - Any modifications to query caches or transformations of data before delivering it to components are handled here.  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Hook Usages in UI Components**  
+   - Hooks from the second layer are utilized in UI components to fetch data and manage loading, error, and success states.  
+   - The UI is updated dynamically based on the state of the fetched data.  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+# Assumptions  
+
+Due to the short deadline for this task, some features were implemented using MUI components to streamline development. The primary focus was on delivering a well-structured and clean codebase that meets the main criteria. Some secondary features, such as showing or hiding columns, were efficiently handled using built-in MUI functionalities.  
