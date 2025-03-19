@@ -1,7 +1,7 @@
 # Setup Instructions  
-
-1. Create a `.env` file in the project root and define the required environment variables based on the `.env.example` file.  
-2. Run `yarn dev` to start the project in development mode.  
+1. run `yarn` to install the required dependencies.
+2. Create a `.env` file in the project root and define the required environment variables based on the `.env.example` file.  
+3. Run `yarn dev` to start the project in development mode.  
 
 ---
 
